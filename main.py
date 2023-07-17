@@ -26,14 +26,14 @@ def send_messages():
     
     # Iterate through the contacts in the CSV file
     for i, row in contatos_df.iterrows(): 
-        pessoa = row['Nome']
+        pessoa = row['Nome'].title()
         numero = row['Número']
         mensagem = row['Mensagem']
-        atendente = row['Vendedor Preferido - Última venda']
+        atendente = row['Vendedor Preferido - Última venda'].title()
         
-        texto = urllib.parse.quote(f"Olá {pessoa}! Obrigado por nos deixar fazer parte de sua história! "
+        texto = urllib.parse.quote(f"Olá {pessoa}! Obrigado por nos deixar fazer parte de sua história!\n\n"
                                    "Nossa equipe está em constante evolução e contamos com você para avaliar o atendimento de nossas lojas."
-                                   "Qual nota você dá para o atendimento de {atendente} sendo 5 muito bom e 1 deixou a desejar. Aguardamos sua nota! "
+                                   f"Qual nota você dá para o atendimento de {atendente} sendo 5 muito bom e 1 deixou a desejar. Aguardamos sua nota!\n\n"
                                    "Atenciosamente, equipe Pérola Jóias 💎")
         link = f"https://web.whatsapp.com/send?phone={numero}&text={texto}"
         navegador.get(link)
