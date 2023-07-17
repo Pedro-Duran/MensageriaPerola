@@ -27,9 +27,15 @@ def send_messages():
     # Iterate through the contacts in the CSV file
     for i, row in contatos_df.iterrows(): 
         pessoa = row['Nome'].title()
-        numero = row['Número']
+        numero = str(row['Número'])
         mensagem = row['Mensagem']
         atendente = row['Vendedor Preferido - Última venda'].title()
+
+
+
+            # Check if the number starts with "+55"
+        if not numero.startswith("+55"):
+            numero = "+55 " + numero
         
         texto = urllib.parse.quote(f"Olá {pessoa}! Obrigado por nos deixar fazer parte de sua história!\n\n"
                                    "Nossa equipe está em constante evolução e contamos com você para avaliar o atendimento de nossas lojas."
