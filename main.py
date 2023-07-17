@@ -25,12 +25,16 @@ def send_messages():
             print("WhatsApp login failed. Please try again.")
     
     # Iterate through the contacts in the CSV file
-    for i, row in contatos_df.iterrows():
-        pessoa = row['Pessoa']
+    for i, row in contatos_df.iterrows(): 
+        pessoa = row['Nome']
         numero = row['Número']
         mensagem = row['Mensagem']
+        atendente = row['Vendedor Preferido - Última venda']
         
-        texto = urllib.parse.quote(f"Oi {pessoa}! {mensagem}")
+        texto = urllib.parse.quote(f"Olá {pessoa}! Obrigado por nos deixar fazer parte de sua história! "
+                                   "Nossa equipe está em constante evolução e contamos com você para avaliar o atendimento de nossas lojas."
+                                   "Qual nota você dá para o atendimento de {atendente} sendo 5 muito bom e 1 deixou a desejar. Aguardamos sua nota! "
+                                   "Atenciosamente, equipe Pérola Jóias 💎")
         link = f"https://web.whatsapp.com/send?phone={numero}&text={texto}"
         navegador.get(link)
         time.sleep(5)  # Adjust the sleep time as needed
@@ -53,7 +57,7 @@ def add_contact(name, phone_number):
     # Append the new contact to the CSV file
     with open('teste.csv', 'a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow([name, phone_number, "hello!"])
+        writer.writerow([name, phone_number, "Obrigada por nos deixar fazer parte de sua história! Queremos sempre melhorar!"])
     
     print("Contact added successfully.")
 
